@@ -1,18 +1,30 @@
 import { useState } from "react";
+import { UpperCaseLetter, LowerCaseLetter, Number, Symbol } from "../Char";
 
 const GeneratePassword = () => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("your password :");
   const [Uppercase, setUpperCase] = useState<boolean>(false);
   const [Lowercase, setLowerCase] = useState<boolean>(false);
   const [Numbers, setNumbers] = useState<boolean>(false);
   const [Symbols, setSymbols] = useState<boolean>(false);
 
+  const HandleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    let character = "";
+    if (UpperCaseLetter && Uppercase === true) {
+      character = character + UpperCaseLetter;
+    }
+    if (LowerCaseLetter && Lowercase === true) {
+      character = character + LowerCaseLetter;
+    }
+    if (Symbol && Symbols === true) {
+      character = character + Symbol;
+    }
+    if (Number && Numbers) {
+      character = character + Number;
+    }
+    setPassword(character);
+  };
   
-
-  const HandleChange=()=>{
-    console.log("hi")
-
-  }
   return (
     <>
       <div>
@@ -33,9 +45,7 @@ const GeneratePassword = () => {
             flexDirection: "row",
           }}
         >
-          <div>
-            <h4 className="password">Your Password : {password}</h4>
-          </div>
+          <h3>{password}</h3>
         </div>
         <br></br>
         <div
