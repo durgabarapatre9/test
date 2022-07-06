@@ -25,10 +25,9 @@
 .password{
   justify-content: center;
   padding-top: 15%;
-
   text-align: center;
 }
+.checkbox_input:hover{
+  background-color: red;
 
-
-
-
+}

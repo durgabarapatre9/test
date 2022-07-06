@@ -2,17 +2,16 @@ import { useState } from "react";
 import { UpperCaseLetter, LowerCaseLetter, Number, Symbol } from "../Char";
 
 const GeneratePassword = () => {
-    interface type{
-        password:string; 
-      }
+  interface type {
+    setPasswordlength: React.Dispatch<React.SetStateAction<number>>;
+  }
   const [password, setPassword] = useState<string>("");
   const [Uppercase, setUpperCase] = useState<boolean>(false);
   const [Lowercase, setLowerCase] = useState<boolean>(false);
   const [Numbers, setNumbers] = useState<boolean>(false);
   const [Symbols, setSymbols] = useState<boolean>(false);
-  const [passwordLength,setPasswordlength]=useState<number>(15)
-
- 
+  const [text, setText] = useState("");
+  const [passwordLength, setPasswordlength] = useState<number>(30);
 
   const HandleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let character = "";
@@ -28,20 +27,26 @@ const GeneratePassword = () => {
     if (Number && Numbers) {
       character = character + Number;
     }
-//     setPassword(character);
-//    console.log(character)
-let password=""
- for (let i=0;i<passwordLength;i++){
-    let index=Math.round(Math.random()*character.length)
-  password+=  character.charAt(index)
- }
- setPassword (password)
+   
+    let password = "";
+    for (let i = 0; i < passwordLength; i++) {
+      let index = Math.round(Math.random() * character.length);
+      password += character.charAt(index);
+    }
+    setPassword(password);
+    console.log(password.length);
+  };
+  const copyPassword = () => {
+    console.log(password);
+    var textField = document.createElement('textarea')
+    textField.innerText = password
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
+    console.log("copied")
   };
 
-  
-
-  
-  
   return (
     <>
       <div>
@@ -49,7 +54,12 @@ let password=""
           className="navbar navbar-light bg-info"
           style={{ justifyContent: "center", top: "0", position: "sticky" }}
         >
-          <h6 className="navbar-text">PASSWORD GENERATOR</h6>
+          <h4
+            className="navbar-text"
+            style={{ color: "white", textShadow: "2px 2px 3px black" }}
+          >
+            PASSWORD GENERATOR
+          </h4>
         </nav>
         <br></br>
         <div
@@ -58,18 +68,32 @@ let password=""
             boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
             marginLeft: "25% ",
             width: "50%",
-            display: "flex",    
+            display: "flex",
             flexDirection: "row",
           }}
         >
-          <h3 style={{marginTop:"3%"}}>{password}</h3>
+          <div style={{ display: "inline", width: "70%" }}>
+            <h3 style={{ padding: "3%", marginTop: "2%" }}>{password}</h3>
+          </div>
+          <div style={{ padding: "3%", display: "inline", width: "30%" }}>
+            <button
+              className="fa fa-copy"
+              style={{ zoom: "2", color: "gray", border: "none" }}
+              onClick={copyPassword}
+            ></button>
+          </div>
         </div>
         <br></br>
         <div
           className="container"
           style={{ justifyContent: "center", width: "50%" }}
         >
-          <h2 className="Heading_tag">Customize your password</h2>
+          <h2 className="Heading_tag">
+            Customize your password <span></span>
+            <span>
+              <i className="fa fa-key"></i>
+            </span>
+          </h2>
           <hr></hr>
 
           <div className="container1">
@@ -79,14 +103,28 @@ let password=""
                 display: "inline",
                 margin: "5%",
                 fontSize: "1.125rem",
+                zoom: "1.3",
               }}
             >
               <label>Password Length</label>
               <br></br>
-              <input type="number" max={50} min={15} defaultValue="15"></input>
+              <input
+                type="number"
+                max={50}
+                min={5}
+                value={passwordLength}
+                onChange={(e: any) => setPasswordlength(e.target.value)}
+              ></input>
             </div>
 
-            <div style={{ display: "inline", width: "50%" }}>
+            <div
+              style={{
+                display: "inline",
+                width: "50%",
+                zoom: "1.3",
+                fontWeight: "lighter",
+              }}
+            >
               <div className="check_box">
                 <input
                   type="checkbox"
@@ -127,7 +165,7 @@ let password=""
           </div>
           <button
             className="btn btn-danger"
-            style={{ borderRadius: "4%" }}
+            style={{ borderRadius: "5%", padding: "1%", fontSize: "1.2rem" }}
             onClick={HandleChange}
           >
             Generate Password
