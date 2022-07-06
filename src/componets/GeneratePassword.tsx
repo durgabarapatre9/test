@@ -2,11 +2,17 @@ import { useState } from "react";
 import { UpperCaseLetter, LowerCaseLetter, Number, Symbol } from "../Char";
 
 const GeneratePassword = () => {
-  const [password, setPassword] = useState("your password :");
+    interface type{
+        password:string; 
+      }
+  const [password, setPassword] = useState<string>("");
   const [Uppercase, setUpperCase] = useState<boolean>(false);
   const [Lowercase, setLowerCase] = useState<boolean>(false);
   const [Numbers, setNumbers] = useState<boolean>(false);
   const [Symbols, setSymbols] = useState<boolean>(false);
+  const [passwordLength,setPasswordlength]=useState<number>(15)
+
+ 
 
   const HandleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let character = "";
@@ -22,8 +28,19 @@ const GeneratePassword = () => {
     if (Number && Numbers) {
       character = character + Number;
     }
-    setPassword(character);
+//     setPassword(character);
+//    console.log(character)
+let password=""
+ for (let i=0;i<passwordLength;i++){
+    let index=Math.round(Math.random()*character.length)
+  password+=  character.charAt(index)
+ }
+ setPassword (password)
   };
+
+  
+
+  
   
   return (
     <>
@@ -41,11 +58,11 @@ const GeneratePassword = () => {
             boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
             marginLeft: "25% ",
             width: "50%",
-            display: "flex",
+            display: "flex",    
             flexDirection: "row",
           }}
         >
-          <h3>{password}</h3>
+          <h3 style={{marginTop:"3%"}}>{password}</h3>
         </div>
         <br></br>
         <div
