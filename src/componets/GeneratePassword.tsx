@@ -81,7 +81,7 @@ const GeneratePassword = () => {
               <br></br>
               <input
                 type="number"
-                max={50}
+                max={40}
                 min={5}
                 value={passwordLength}
                 onChange={(e: any) => setPasswordlength(e.target.value)}
