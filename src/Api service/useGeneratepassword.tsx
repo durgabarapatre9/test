@@ -18,8 +18,11 @@ const useGeneratePassword = () => {
     localStorage.getItem("Symbols") === "true" ? true : false
   );
   const [text, setText] = useState(localStorage.getItem("text"));
-  const [show,setShow]=useState(false)
-  const [passwordLength, setPasswordlength] = useState<number>(25);
+  const [show, setShow] = useState(false);
+  const [passwordLength, setPasswordlength] = useState<any>(
+    localStorage.getItem("length")
+  );
+  console.log(localStorage.getItem("length"));
   useEffect(() => {
     if (password === "") {
       localStorage.setItem("password", JSON.stringify(password));
@@ -62,6 +65,14 @@ const useGeneratePassword = () => {
       localStorage.setItem("text", text);
     }
   });
+  useEffect(() => {
+    if (passwordLength) {
+      localStorage.setItem(
+        "length",
+        JSON.parse(JSON.stringify(passwordLength))
+      );
+    }
+  });
 
   const HandleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let character = "";
@@ -84,27 +95,29 @@ const useGeneratePassword = () => {
       Uppercase === true
     ) {
       setText("Your Password Is Very Strong !");
-    }else if (Numbers === true&&Symbols===true&&Uppercase==true) {
+    } else if (Numbers === true && Symbols === true && Uppercase == true) {
       setText("Your Password Is Meadium!");
-    }else if (Numbers === true&&Lowercase===true&&Uppercase==true) {
+    } else if (Numbers === true && Lowercase === true && Uppercase == true) {
       setText("Your Password Is Meadium!");
-    }else if (Numbers === true&&Lowercase===true&&Symbols==true) {
+    } else if (Numbers === true && Lowercase === true && Symbols == true) {
       setText("Your Password Is Meadium!");
-    }else if(Numbers === true &&Symbols===true){
+    } else if (Numbers === true && Symbols === true) {
       setText("Your Password Is  Weak !");
-    }else if(Uppercase === true &&Lowercase===true){
+    } else if (Uppercase === true && Lowercase === true) {
       setText("Your Password Is  Weak!");
-    }else if(Numbers === true &&Lowercase===true){
+    } else if (Numbers === true && Lowercase === true) {
       setText("Your Password Is  Weak!");
     } else if (Numbers === true) {
       setText("Your Password Is very Weak!");
-    }else if (Uppercase === true) {
+    } else if (Uppercase === true) {
       setText("Your Password Is very Weak!");
-    }else if (Lowercase === true) {
+    } else if (Lowercase === true) {
       setText("Your Password Is very Weak!");
-    }else if (Symbols === true) {
+    } else if (Symbols === true) {
       setText("Your Password Is very Weak!");
-    }else{setText("none")}
+    } else {
+      setText("none");
+    }
 
     let password = "";
     for (let i = 0; i < passwordLength; i++) {
@@ -113,9 +126,9 @@ const useGeneratePassword = () => {
     }
     setPassword(password);
   };
-  const ShowPassword=()=>{
-    setShow(!show)
-  }
+  const ShowPassword = () => {
+    setShow(!show);
+  };
 
   const copyPassword = () => {
     console.log(password);
@@ -143,7 +156,7 @@ const useGeneratePassword = () => {
     setPasswordlength,
     copyPassword,
     ShowPassword,
-    show
+    show,
   ] as const;
 };
 

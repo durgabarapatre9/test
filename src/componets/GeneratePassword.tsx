@@ -164,15 +164,9 @@ const GeneratePassword = () => {
           </button>
           <br></br>
           <br></br>
-          {text ? (
-            <>
-              <div className="alert alert-primary" role="alert">
+          <div className="alert alert-primary" role="alert">
                 <h5> {text} </h5>
               </div>
-            </>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </>
