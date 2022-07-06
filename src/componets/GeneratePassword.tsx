@@ -1,4 +1,3 @@
-
 import useGeneratePassword from "../Api service/useGeneratepassword";
 
 const GeneratePassword = () => {
@@ -19,7 +18,6 @@ const GeneratePassword = () => {
     copyPassword,
     ShowPassword,
     show,
-    
   ] = useGeneratePassword();
 
   return (
@@ -49,9 +47,9 @@ const GeneratePassword = () => {
         >
           <div style={{ display: "inline", width: "70%" }}>
             <input
-              type={show?"text":"password"}
+              type={show ? "text" : "password"}
               value={password}
-              onChange={(e:any)=>setPasswordlength(e.target.value)}
+              onChange={(e: any) => setPasswordlength(e.target.value)}
               style={{
                 zoom: "1.5",
                 border: "none",
@@ -71,7 +69,7 @@ const GeneratePassword = () => {
           </div>
           <div style={{ padding: "3%", display: "inline", width: "10%" }}>
             <button className="btn btn-primary" onClick={ShowPassword}>
-          {show?"Hide":"Show"}
+              {show ? "Hide" : "Show"}
             </button>
           </div>
         </div>
@@ -165,8 +163,8 @@ const GeneratePassword = () => {
           <br></br>
           <br></br>
           <div className="alert alert-primary" role="alert">
-                <h5> {text} </h5>
-              </div>
+            <h5> {text} </h5>
+          </div>
         </div>
       </div>
     </>
