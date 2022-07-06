@@ -20,45 +20,45 @@ const useGeneratePassword = () => {
   const [text, setText] = useState(localStorage.getItem("text"));
   const [passwordLength, setPasswordlength] = useState<number>(15);
   useEffect(() => {
-    if (password == "") {
+    if (password === "") {
       localStorage.setItem("password", JSON.stringify(password));
     } else if (password) {
-      localStorage.setItem("password",(password));
+      localStorage.setItem("password", password);
     }
   });
   useEffect(() => {
-    if (Uppercase == true) {
+    if (Uppercase === true) {
       localStorage.setItem("Uppercase", JSON.stringify(Uppercase));
-    } else if (Uppercase == false) {
+    } else if (Uppercase === false) {
       localStorage.setItem("Uppercase", JSON.stringify(Uppercase));
     }
   });
   useEffect(() => {
-    if (Lowercase == true) {
+    if (Lowercase === true) {
       localStorage.setItem("Lowercase", JSON.stringify(Lowercase));
-    } else if (Lowercase == false) {
+    } else if (Lowercase === false) {
       localStorage.setItem("Lowercase", JSON.stringify(Lowercase));
     }
   });
   useEffect(() => {
-    if (Numbers == true) {
+    if (Numbers === true) {
       localStorage.setItem("Numbers", JSON.stringify(Numbers));
-    } else if (Lowercase == false) {
+    } else if (Lowercase === false) {
       localStorage.setItem("Numbers", JSON.stringify(Numbers));
     }
   });
   useEffect(() => {
-    if (Symbols == true) {
+    if (Symbols === true) {
       localStorage.setItem("Symbols", JSON.stringify(Symbols));
-    } else if (Lowercase == false) {
+    } else if (Lowercase === false) {
       localStorage.setItem("Symbols", JSON.stringify(Symbols));
     }
   });
   useEffect(() => {
-    if (text == '') {
-      localStorage.setItem("text", (text));
+    if (text === "") {
+      localStorage.setItem("text", text);
     } else if (text) {
-      localStorage.setItem("text", (text));
+      localStorage.setItem("text", text);
     }
   });
 
@@ -66,22 +66,21 @@ const useGeneratePassword = () => {
     let character = "";
     if (UpperCaseLetter && Uppercase === true) {
       character = character + UpperCaseLetter;
-      setText("your Password Is To weak !");
     }
     if (LowerCaseLetter && Lowercase === true) {
       character = character + LowerCaseLetter;
-      setText("your Password Is To weak !");
     }
     if (Symbol && Symbols === true) {
       character = character + Symbol;
-      setText("your Password Is To weak !");
     }
-    if (Number && Numbers) {
+    if (Number && Numbers==true) {
       character = character + Number;
-      setText("your Password Is To weak !");
     }
-    if (Symbols && Uppercase && Lowercase&&Number) {
-      setText("your Password Is To strong !");
+    if (Symbols && Uppercase && Lowercase && Number) {
+     setText("Your Password Is very strong !"); 
+    }
+     if(Symbols&&Lowercase&&Uppercase){
+      setText("Your Password Is Meadium !");
     }
 
     let password = "";
@@ -90,13 +89,9 @@ const useGeneratePassword = () => {
       password += character.charAt(index);
     }
     setPassword(password);
-    if (password.length < 15  && Number) {
-      setText("your Password Is To weak !");
-    } else if (password.length > 15 && password) {
-      setText("your Password Is To strong !");
-    }else if(password.length > 15 && Number){
-      setText("your Password Is To weak !");
-    }
+    // if (password.length < 15 && Number) {
+    //   setText("your Password Is To weak !");
+    // }
   };
 
   const copyPassword = () => {
