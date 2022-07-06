@@ -18,7 +18,8 @@ const useGeneratePassword = () => {
     localStorage.getItem("Symbols") === "true" ? true : false
   );
   const [text, setText] = useState(localStorage.getItem("text"));
-  const [passwordLength, setPasswordlength] = useState<number>(15);
+  const [show,setShow]=useState(false)
+  const [passwordLength, setPasswordlength] = useState<number>(25);
   useEffect(() => {
     if (password === "") {
       localStorage.setItem("password", JSON.stringify(password));
@@ -73,15 +74,37 @@ const useGeneratePassword = () => {
     if (Symbol && Symbols === true) {
       character = character + Symbol;
     }
-    if (Number && Numbers==true) {
+    if (Number && Numbers == true) {
       character = character + Number;
     }
-    if (Symbols && Uppercase && Lowercase && Number) {
-     setText("Your Password Is very strong !"); 
-    }
-     if(Symbols&&Lowercase&&Uppercase){
-      setText("Your Password Is Meadium !");
-    }
+    if (
+      Numbers == true &&
+      Symbols == true &&
+      Lowercase === true &&
+      Uppercase === true
+    ) {
+      setText("Your Password Is Very Strong !");
+    }else if (Numbers === true&&Symbols===true&&Uppercase==true) {
+      setText("Your Password Is Meadium!");
+    }else if (Numbers === true&&Lowercase===true&&Uppercase==true) {
+      setText("Your Password Is Meadium!");
+    }else if (Numbers === true&&Lowercase===true&&Symbols==true) {
+      setText("Your Password Is Meadium!");
+    }else if(Numbers === true &&Symbols===true){
+      setText("Your Password Is  Weak !");
+    }else if(Uppercase === true &&Lowercase===true){
+      setText("Your Password Is  Weak!");
+    }else if(Numbers === true &&Lowercase===true){
+      setText("Your Password Is  Weak!");
+    } else if (Numbers === true) {
+      setText("Your Password Is very Weak!");
+    }else if (Uppercase === true) {
+      setText("Your Password Is very Weak!");
+    }else if (Lowercase === true) {
+      setText("Your Password Is very Weak!");
+    }else if (Symbols === true) {
+      setText("Your Password Is very Weak!");
+    }else{setText("none")}
 
     let password = "";
     for (let i = 0; i < passwordLength; i++) {
@@ -89,10 +112,10 @@ const useGeneratePassword = () => {
       password += character.charAt(index);
     }
     setPassword(password);
-    // if (password.length < 15 && Number) {
-    //   setText("your Password Is To weak !");
-    // }
   };
+  const ShowPassword=()=>{
+    setShow(!show)
+  }
 
   const copyPassword = () => {
     console.log(password);
@@ -119,6 +142,8 @@ const useGeneratePassword = () => {
     setSymbols,
     setPasswordlength,
     copyPassword,
+    ShowPassword,
+    show
   ] as const;
 };
 

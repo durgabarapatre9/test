@@ -1,3 +1,4 @@
+
 import useGeneratePassword from "../Api service/useGeneratepassword";
 
 const GeneratePassword = () => {
@@ -16,6 +17,9 @@ const GeneratePassword = () => {
     setSymbols,
     setPasswordlength,
     copyPassword,
+    ShowPassword,
+    show,
+    
   ] = useGeneratePassword();
 
   return (
@@ -44,14 +48,31 @@ const GeneratePassword = () => {
           }}
         >
           <div style={{ display: "inline", width: "70%" }}>
-            <h3 style={{ padding: "3%", marginTop: "2%" }}>{password}</h3>
+            <input
+              type={show?"text":"password"}
+              value={password}
+              onChange={(e:any)=>setPasswordlength(e.target.value)}
+              style={{
+                zoom: "1.5",
+                border: "none",
+                padding: "3%",
+                marginTop: "2%",
+                width: "100%",
+              }}
+            />
+            {/* <h3  style={{ padding: "3%", marginTop: "2%" }}>{password}</h3> */}
           </div>
-          <div style={{ padding: "3%", display: "inline", width: "30%" }}>
+          <div style={{ padding: "3%", display: "inline", width: "10%" }}>
             <button
               className="fa fa-copy"
               style={{ zoom: "2", color: "gray", border: "none" }}
               onClick={copyPassword}
             ></button>
+          </div>
+          <div style={{ padding: "3%", display: "inline", width: "10%" }}>
+            <button className="btn btn-primary" onClick={ShowPassword}>
+          {show?"Hide":"Show"}
+            </button>
           </div>
         </div>
         <br></br>
@@ -146,7 +167,7 @@ const GeneratePassword = () => {
           {text ? (
             <>
               <div className="alert alert-primary" role="alert">
-                {text}
+                <h5> {text} </h5>
               </div>
             </>
           ) : (
