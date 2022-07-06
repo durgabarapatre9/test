@@ -1,51 +1,22 @@
-import { useState } from "react";
-import { UpperCaseLetter, LowerCaseLetter, Number, Symbol } from "../Char";
+import useGeneratePassword from "../Api service/useGeneratepassword";
 
 const GeneratePassword = () => {
-  interface type {
-    setPasswordlength: React.Dispatch<React.SetStateAction<number>>;
-  }
-  const [password, setPassword] = useState<string>("");
-  const [Uppercase, setUpperCase] = useState<boolean>(false);
-  const [Lowercase, setLowerCase] = useState<boolean>(false);
-  const [Numbers, setNumbers] = useState<boolean>(false);
-  const [Symbols, setSymbols] = useState<boolean>(false);
-  const [text, setText] = useState("");
-  const [passwordLength, setPasswordlength] = useState<number>(30);
-
-  const HandleChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    let character = "";
-    if (UpperCaseLetter && Uppercase === true) {
-      character = character + UpperCaseLetter;
-    }
-    if (LowerCaseLetter && Lowercase === true) {
-      character = character + LowerCaseLetter;
-    }
-    if (Symbol && Symbols === true) {
-      character = character + Symbol;
-    }
-    if (Number && Numbers) {
-      character = character + Number;
-    }
-   
-    let password = "";
-    for (let i = 0; i < passwordLength; i++) {
-      let index = Math.round(Math.random() * character.length);
-      password += character.charAt(index);
-    }
-    setPassword(password);
-    console.log(password.length);
-  };
-  const copyPassword = () => {
-    console.log(password);
-    var textField = document.createElement('textarea')
-    textField.innerText = password
-    document.body.appendChild(textField)
-    textField.select()
-    document.execCommand('copy')
-    textField.remove()
-    console.log("copied")
-  };
+  const [
+    HandleChange,
+    password,
+    Uppercase,
+    Lowercase,
+    Numbers,
+    Symbols,
+    text,
+    passwordLength,
+    setUpperCase,
+    setLowerCase,
+    setNumbers,
+    setSymbols,
+    setPasswordlength,
+    copyPassword,
+  ] = useGeneratePassword();
 
   return (
     <>
@@ -170,6 +141,17 @@ const GeneratePassword = () => {
           >
             Generate Password
           </button>
+          <br></br>
+          <br></br>
+          {text ? (
+            <>
+              <div className="alert alert-primary" role="alert">
+                {text}
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
