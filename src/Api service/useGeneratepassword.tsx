@@ -85,22 +85,22 @@ const useGeneratePassword = () => {
     if (Symbol && Symbols === true) {
       character = character + Symbol;
     }
-    if (Number && Numbers == true) {
+    if (Number && Numbers === true) {
       character = character + Number;
     }
     if (
-      Numbers == true &&
-      Symbols == true &&
+      Numbers === true &&
+      Symbols === true &&
       Lowercase === true &&
       Uppercase === true
     ) {
       setText("Your Password Is Very Strong !");
-    } else if (Numbers === true && Symbols === true && Uppercase == true) {
-      setText("Your Password Is Meadium!");
-    } else if (Numbers === true && Lowercase === true && Uppercase == true) {
-      setText("Your Password Is Meadium!");
-    } else if (Numbers === true && Lowercase === true && Symbols == true) {
-      setText("Your Password Is Meadium!");
+    } else if (Numbers === true && Symbols === true && Uppercase === true) {
+      setText("Your Password Is Medium!");
+    } else if (Numbers === true && Lowercase === true && Uppercase === true) {
+      setText("Your Password Is Medium!");
+    } else if (Numbers === true && Lowercase === true && Symbols === true) {
+      setText("Your Password Is Medium!");
     } else if (Numbers === true && Symbols === true) {
       setText("Your Password Is  Weak !");
     } else if (Uppercase === true && Lowercase === true) {
